@@ -1,0 +1,190 @@
+/* 全局重置与基础设置 */
+:root {
+    --primary-color: #363636;
+    --accent-color: #4a90e2; /* 学术蓝 */
+    --bg-color: #ffffff;
+    --text-color: #444444;
+    --light-gray: #f5f5f5;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px; /* 限制宽度以提升阅读体验 */
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* 头部样式 */
+.paper-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.paper-title {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.authors {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.authors a {
+    color: var(--accent-color);
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.affiliations {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* 按钮组设计 */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #357abd;
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+}
+
+.btn-secondary {
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+/* 图片与图表 */
+.teaser, .method {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.caption {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 10px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 摘要与正文 */
+.abstract, .results, .citation {
+    margin-bottom: 50px;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--light-gray);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 表格美化 */
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.95rem;
+}
+
+th, td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: var(--light-gray);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+tr.highlight {
+    background-color: rgba(74, 144, 226, 0.1);
+    font-weight: bold;
+}
+
+/* 引用块 */
+pre {
+    background-color: var(--light-gray);
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* 移动端适配 */
+@media (max-width: 600px) {
+    .paper-title {
+        font-size: 1.6rem;
+    }
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
