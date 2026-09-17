@@ -5,101 +5,356 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FALCON: Flow Matching Guided LLMs to Capture Intent Clues</title>
     <link rel="stylesheet" href="style.css">
-    <!-- 引入 FontAwesome 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <div class="container">
-        <!-- Header: Title and Authors -->
+        <!-- Header -->
         <header class="paper-header">
             <h1 class="paper-title">FALCON: Flow Matching Guided LLMs to Capture Intent Clues</h1>
-            
+
             <div class="authors">
+<<<<<<< HEAD
                 <a href="#">Anonymous</a><sup>1</sup>, 
             </div>
             
             <div class="affiliations">
                 <p><sup>1</sup> Anonymous Team 1, <sup>2</sup> Anonymous Team 2</p>
+=======
+                Anonymous Author(s)<sup>1,2</sup>
             </div>
 
-            <!-- Core Action Buttons -->
+            <div class="affiliations">
+                <p><sup>1</sup> Kuaishou Community Science Line &emsp; <sup>2</sup> Lead Advertising Algorithm Group</p>
+            </div>
+
+            <div class="venue-badge">
+                <span class="badge"><i class="fas fa-trophy"></i> WSDM 2027, Cordis, Hong Kong</span>
+>>>>>>> 13bf7be (update 2026.09.17)
+            </div>
+
             <div class="button-group">
-                <a href="#" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Paper (PDF)</a>
-                <a href="#" class="btn btn-secondary"><i class="fab fa-github"></i> Code (GitHub)</a>
+                <a href="/Users/lweihan/Downloads/WSDM_2027_FALCON.pdf" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Paper (PDF)</a>
+                <a href="https://anonymous.4open.science/r/FALCON-D5B5/README.md" class="btn btn-secondary" target="_blank"><i class="fab fa-github"></i> Code (GitHub)</a>
+                <a href="#" class="btn btn-outline"><i class="fas fa-quote-right"></i> BibTeX</a>
             </div>
         </header>
 
-        <!-- Teaser Image -->
+        <!-- Teaser Figure -->
         <section class="teaser">
-            <img src="your-teaser-image.png" alt="Teaser image of the proposed method">
-            <p class="caption">Fig. 1: Comparison of our method across different scenarios. Our model (right) outperforms existing methods (left) in detail preservation.</p>
+            <div class="figure-placeholder">
+                <div class="figure-box">
+                    <i class="fas fa-chart-bar figure-icon"></i>
+                    <span class="figure-label">Figure 1</span>
+                </div>
+            </div>
+            <p class="caption">
+                <strong>Figure 1:</strong> A comparison of early and final intention reasoning in LLMs.
+                The red items represent the user's final conversion intent. LLMs tend to over-balance
+                multiple plausible intents in the early stage (left), while FALCON anchors on the
+                decisive conversion path (right). The bar chart shows industry conversion scores.
+            </p>
         </section>
 
         <!-- Abstract -->
         <section class="abstract">
             <h2>Abstract</h2>
             <p>
-                User Interface Design (UI Design) refers to the process of designing human-computer interaction interfaces. This paper thoroughly explores the importance of UI design in modern society. We propose a novel approach that combines the advantages of grid layout and fluid layout to effectively improve user reading efficiency. Experimental results demonstrate that the proposed method achieves significant improvements in both learnability and aesthetic quality.
+                User conversion intent reasoning in lead advertising is severely challenged by the
+                early-stage ambiguity of behavioral trajectories, where static profiles and short-term
+                actions provide sparse, fragmented, and multi-faceted clues. Traditional deep recommendation
+                models fail to fully exploit the continuous temporal dynamics of user intent, whereas
+                Large Language Models (LLMs), despite their superior semantic reasoning, tend to
+                <strong>over-balance candidate intents in sparse signal regimes</strong> rather than anchoring on
+                decisive conversion paths.
             </p>
-        </section>
-
-        <!-- Method -->
-        <section class="method">
-            <h2>Method</h2>
-            <div class="figure-container">
-                <img src="method-pipeline.png" alt="Method pipeline diagram">
-            </div>
             <p>
-                We adopt a modular design philosophy. Data is first cleaned through a preprocessing module, then fed into the core network. Our design follows the principles of "clarity" and "consistency" to ensure visual uniformity across all elements.
+                To address this gap, we present <strong>FALCON</strong> (Flow matching in Advertising scenarios based
+                on Latent Clue Online policy distillatioN), a framework that bridges LLM semantic reasoning
+                and continuous intent trajectory modeling. FALCON first reformulates LLM-generated user
+                narratives into structured, partitioned XML segments and aggregates them via a query-key-value
+                attention mechanism using static profiles as personalized anchors. Treating intent evolution as
+                a continuous probability flow, FALCON pre-trains a <strong>Flow Matching Teacher</strong> over 30-day user
+                trajectories. The teacher utilizes <strong>FalconNet</strong> — a Diffusion Transformer (DiT) architecture
+                enhanced with AdaLN-Zero conditioning, QK-Norm, and RoPE — to learn a conditional velocity
+                field that dynamically refines ambiguous early-stage embeddings toward conversion-aligned
+                future states.
+            </p>
+            <p>
+                To avoid inference latency overhead during deployment, FALCON introduces
+                <strong>Conversion-aware Flow-refined Online Policy Distillation (CF-OPD)</strong>, transferring the
+                teacher's dynamic intent reasoning into the LLM student via group-wise advantage estimation
+                and reward-guided post-training. Extensive offline evaluations across multiple backbones on
+                two large-scale industrial advertising datasets, alongside an <strong>eight-day online A/B test</strong>,
+                demonstrate that FALCON significantly outperforms strong baselines, achieving a
+                <span class="highlight-text">+4.310% lift in Conversion Rate (CVR)</span> and a
+                <span class="highlight-text">+2.87% increase in platform revenue</span>.
             </p>
         </section>
 
-        <!-- Results -->
-        <section class="results">
-            <h2>Results</h2>
-            <p>We conduct extensive experiments on standard benchmarks, with results shown in the table below:</p>
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Method</th>
-                            <th>Accuracy (%)</th>
-                            <th>Latency (ms)</th>
-                            <th>User Satisfaction</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Baseline A</td>
-                            <td>85.4</td>
-                            <td>120</td>
-                            <td>3.5/5.0</td>
-                        </tr>
-                        <tr class="highlight">
-                            <td><strong>Ours</strong></td>
-                            <td><strong>92.1</strong></td>
-                            <td><strong>98</strong></td>
-                            <td><strong>4.8/5.0</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- Framework Overview -->
+        <section class="method">
+            <h2>FALCON Framework</h2>
+            <div class="figure-placeholder large">
+                <div class="figure-box">
+                    <i class="fas fa-project-diagram figure-icon"></i>
+                    <span class="figure-label">Figure 2</span>
+                </div>
+            </div>
+            <p class="caption">
+                <strong>Figure 2:</strong> Overview of the FALCON framework. FALCON has two stages:
+                (a) <strong>Flow Matching Teacher Pre-training</strong>, which learns time-conditioned intent
+                trajectories from user static and dynamic feature sequences using the FalconNet network;
+                (b) <strong>CF-OPD Post-training</strong>, which distills Flow-refined and conversion-aware signals
+                into the LLM student for teacher-free online serving.
+            </p>
+
+            <div class="pipeline-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Partitioned XML Narrative Encoding</h3>
+                    <p>LLM transforms user behavioral history into structured XML segments (static, interest,
+                    consumption, demand) aggregated via QKV attention with static profiles as personalized anchors.</p>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Flow Matching Teacher (FalconNet)</h3>
+                    <p>Time-conditioned DiT architecture with AdaLN-Zero, QK-Norm, and RoPE learns a velocity field
+                    over 30-day trajectories to refine early-stage embeddings toward conversion-aligned states.</p>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>CF-OPD Post-training</h3>
+                    <p>Group-wise advantage estimation + reward-guided optimization distills the teacher's temporal
+                    reasoning into the LLM student. Serving path remains strictly teacher-free.</p>
+                </div>
             </div>
         </section>
 
-        <!-- Citation -->
-        <section class="citation">
-            <h2>Citation</h2>
-            <pre><code>@article{yourname2024falcon,
-  title={FALCON: Flow Matching Guided LLMs to Capture Intent Clues},
-  author={Author One and Author Two},
-  journal={Conference/Journal Name},
-  year={2024}
-}</code></pre>
+        <!-- FalconNet Architecture -->
+        <section class="architecture">
+            <h2>FalconNet Architecture</h2>
+            <div class="figure-placeholder">
+                <div class="figure-box">
+                    <i class="fas fa-cubes figure-icon"></i>
+                    <span class="figure-label">Figure 3</span>
+                </div>
+            </div>
+            <p class="caption">
+                <strong>Figure 3:</strong> FalconNet architecture. The input embedding x<sub>t</sub> &in; R<sup>256</sup>
+                is patchified into P tokens (each R<sup>d_patch</sup>). Time t, condition c, and temporal gap &Delta;t
+                are encoded separately and summed to form the global conditioning vector fed into L DiT blocks.
+                Each block applies RMSNorm, Multi-Head Self-Attention with QK-Norm and RoPE, SwiGLU FFN,
+                and AdaLN-Zero modulation. The small-scale configuration (d=768, L=3, P=16, ~8M parameters)
+                provides an effective trade-off between capacity and training stability.
+            </p>
+
+            <div class="arch-details">
+                <div class="arch-item">
+                    <h4><i class="fas fa-puzzle-piece"></i> Patchify Embedding</h4>
+                    <p>256-dim user embedding reshaped into P patches, each projected to dimension d via linear layer
+                    with additive patch-type embeddings.</p>
+                </div>
+                <div class="arch-item">
+                    <h4><i class="fas fa-sliders-h"></i> AdaLN-Zero Modulation</h4>
+                    <p>Zero-initialized gate and output projection layers ensure each DiT block behaves as identity
+                    mapping at initialization, enabling stable deep network training.</p>
+                </div>
+                <div class="arch-item">
+                    <h4><i class="fas fa-link"></i> QK-Norm &amp; RoPE</h4>
+                    <p>Query-Key normalization stabilizes attention logits; Rotary Position Embedding injects relative
+                    positional information into query and key representations.</p>
+                </div>
+                <div class="arch-item">
+                    <h4><i class="fas fa-bolt"></i> SwiGLU Feed-Forward</h4>
+                    <p>Gated linear unit with SiLU activation, with hidden dimension set to 2/3 of standard FFN
+                    to match parameter count.</p>
+                </div>
+            </div>
         </section>
 
+        <!-- Key Results -->
+        <section class="results">
+            <h2>Experimental Results</h2>
+
+            <h3>Offline Comparison — Multiple Backbones</h3>
+            <div class="figure-placeholder large">
+                <div class="figure-box">
+                    <i class="fas fa-table figure-icon"></i>
+                    <span class="figure-label">Table 1</span>
+                </div>
+            </div>
+            <p class="caption">
+                <strong>Table 1:</strong> Performance comparison under different training strategies on the
+                AlimamaTech/MAC and EVENT_PRIVATE_MESSAGE_SENT datasets. FALCON consistently improves
+                AUC, GAUC, and NDCG@10 across DeepFM, DCNv2, DIEN, RankMixer, and TokenMixer backbones.
+                Teacher-free pre-training achieves the most favorable quality–efficiency trade-off, preserving
+                original ranker parameters and inference latency while improving all metrics.
+            </p>
+
+            <div class="key-metrics">
+                <div class="metric-card">
+                    <div class="metric-value">+4.310%</div>
+                    <div class="metric-label">CVR Lift (Online A/B)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">+2.87%</div>
+                    <div class="metric-label">Revenue Increase</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">5</div>
+                    <div class="metric-label">Ranker Backbones</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">~8M</div>
+                    <div class="metric-label">FM Teacher Params</div>
+                </div>
+            </div>
+
+            <h3>CF-OPD Post-training Across Foundation Models</h3>
+            <div class="figure-placeholder">
+                <div class="figure-box">
+                    <i class="fas fa-table figure-icon"></i>
+                    <span class="figure-label">Table 2</span>
+                </div>
+            </div>
+            <p class="caption">
+                <strong>Table 2:</strong> CF-OPD comparison with different foundation models (keye-1.5-8B, qwen3-8B,
+                qwen3.5-30B) under a fixed TokenMixer ranker. CF-OPD + CVR Reward consistently achieves the strongest
+                overall results across all foundation models. Flow-refined teacher supervision transfers temporal
+                intent-evolution knowledge, while CVR reward further steers representations toward downstream
+                conversion objectives.
+            </p>
+
+            <h3>Online A/B Test</h3>
+            <div class="figure-placeholder">
+                <div class="figure-box">
+                    <i class="fas fa-chart-line figure-icon"></i>
+                    <span class="figure-label">Figure 7 &amp; Table 5</span>
+                </div>
+            </div>
+            <p class="caption">
+                <strong>Figure 7 &amp; Table 5:</strong> Eight-day online A/B test results in a live lead advertising
+                ranking system. Direct LLM embedding integration achieves +2.219% CVR and +1.23% revenue lift.
+                FALCON-tuned LLM embeddings further improve performance to <strong>+4.310% CVR lift</strong> and
+                <strong>+2.87% revenue lift</strong>, with daily CVR lift remaining consistently positive with low
+                variance throughout the experiment period, bringing an additional +1.64% revenue lift over
+                the original LLM embeddings.
+            </p>
+        </section>
+
+        <!-- Ablation Studies -->
+        <section class="ablation">
+            <h2>Ablation &amp; Sensitivity Analysis</h2>
+
+            <div class="ablation-grid">
+                <div class="ablation-item">
+                    <div class="figure-placeholder small">
+                        <div class="figure-box">
+                            <i class="fas fa-chart-bar figure-icon"></i>
+                            <span class="figure-label">Tables 3 &amp; 4</span>
+                        </div>
+                    </div>
+                    <p class="caption">
+                        <strong>Tables 3 &amp; 4:</strong> Component-level and FM-objective ablation on MAC dataset.
+                        Removing XML partitioning and attention fusion significantly degrades performance,
+                        confirming the importance of structured narrative encoding. Endpoint consistency loss
+                        and temporal weighting are critical for robust temporal representation learning.
+                    </p>
+                </div>
+                <div class="ablation-item">
+                    <div class="figure-placeholder small">
+                        <div class="figure-box">
+                            <i class="fas fa-sliders-h figure-icon"></i>
+                            <span class="figure-label">Figures 4 &amp; 5</span>
+                        </div>
+                    </div>
+                    <p class="caption">
+                        <strong>Figures 4 &amp; 5:</strong> Hyper-parameter sensitivity of FM Teacher pre-training
+                        and CF-OPD. AUC generally follows an inverted-U trend: moderate ODE solver steps
+                        enhance temporal refinement; balanced reward weight &lambda;<sub>r</sub> between embedding
+                        alignment and CVR reward yields optimal performance.
+                    </p>
+                </div>
+                <div class="ablation-item full-width">
+                    <div class="figure-placeholder small">
+                        <div class="figure-box">
+                            <i class="fas fa-vector-square figure-icon"></i>
+                            <span class="figure-label">Figure 6</span>
+                        </div>
+                    </div>
+                    <p class="caption">
+                        <strong>Figure 6:</strong> Visualization of representation drift over time. Without CF-OPD (a),
+                        cosine distance between FM Teacher and LLM representations intensifies significantly,
+                        culminating in severe representation drift at later stages (c). With CF-OPD (b), a
+                        consistently low and stable distance is maintained across all time points, demonstrating
+                        effective anchoring of historical knowledge and mitigation of catastrophic forgetting.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contributions -->
+        <section class="contributions">
+            <h2>Key Contributions</h2>
+            <div class="contribution-list">
+                <div class="contribution-item">
+                    <div class="contribution-icon"><i class="fas fa-lightbulb"></i></div>
+                    <div class="contribution-body">
+                        <h4>Problem Reframing</h4>
+                        <p>Identified early-stage core intent anchoring as a key bottleneck in lead advertising,
+                        where LLMs over-balance multiple plausible intents while traditional recommenders are
+                        limited in exploiting rich behavioral trajectories.</p>
+                    </div>
+                </div>
+                <div class="contribution-item">
+                    <div class="contribution-icon"><i class="fas fa-cogs"></i></div>
+                    <div class="contribution-body">
+                        <h4>Algorithmic Design</h4>
+                        <p>Proposed a time-conditioned Flow Matching teacher (FalconNet) to capture core-intent
+                        trajectories from 30-day behavior sequences, and CF-OPD — a CVR-guided policy post-training
+                        mechanism — to distill this reasoning into a deployable LLM student.</p>
+                    </div>
+                </div>
+                <div class="contribution-item">
+                    <div class="contribution-icon"><i class="fas fa-industry"></i></div>
+                    <div class="contribution-body">
+                        <h4>Industrial Validation</h4>
+                        <p>Extensive offline experiments across 5 backbone rankers on 2 large-scale datasets and a
+                        successful 8-day online A/B test confirming <strong>+4.310% CVR</strong> and <strong>+2.87% revenue</strong>
+                        gains while keeping the serving path teacher-free.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BibTeX Citation -->
+        <section class="citation" id="bibtex">
+            <h2>Citation</h2>
+            <div class="bibtex-container">
+                <pre><code>@inproceedings{falcon2027,
+  title     = {FALCON: Flow Matching Guided LLMs to Capture Intent Clues},
+  author    = {Anonymous Author(s)},
+  booktitle = {Proceedings of the 20th ACM International Conference on
+               Web Search and Data Mining (WSDM '27)},
+  year      = {2027},
+  location  = {Cordis, Hong Kong},
+  publisher = {ACM},
+  doi       = {To appear}
+}</code></pre>
+                <button class="btn btn-small btn-outline copy-btn" onclick="navigator.clipboard.writeText(document.querySelector('.bibtex-container code').textContent)">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+        </section>
+
+        <!-- Footer -->
         <footer>
-            <p>This project page is based on an open-source academic template, licensed under MIT.</p>
+            <p>© WSDM 2027. This project page accompanies the paper <em>FALCON: Flow Matching Guided LLMs to Capture Intent Clues</em>.</p>
+            <p>Code available at <a href="https://anonymous.4open.science/r/FALCON-D5B5/README.md" target="_blank">anonymous.4open.science/r/FALCON-D5B5</a></p>
         </footer>
     </div>
 
