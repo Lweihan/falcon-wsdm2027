@@ -393,6 +393,18 @@ section {
     box-shadow: var(--shadow);
 }
 
+.metric-card.highlight-card {
+    background: linear-gradient(135deg, var(--accent-light), rgba(124, 58, 237, 0.06));
+    border-color: var(--accent-color);
+}
+
+.metric-card.highlight-card .metric-value {
+    background: linear-gradient(135deg, var(--accent-color), #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 .metric-value {
     font-size: 2rem;
     font-weight: 800;
