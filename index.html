@@ -29,20 +29,44 @@
             </div>
         </header>
 
-        <!-- Teaser Figure -->
+        <!-- Framework Overview — First Figure -->
         <section class="teaser">
-            <div class="figure-placeholder">
-                <div class="figure-box">
-                    <i class="fas fa-chart-bar figure-icon"></i>
-                    <span class="figure-label">Figure 1</span>
+            <div class="figure-placeholder large">
+                <div class="figure-box vertical-fig">
+                    <i class="fas fa-project-diagram figure-icon"></i>
+                    <span class="figure-label">Figure 2</span>
                 </div>
             </div>
             <p class="caption">
-                <strong>Figure 1:</strong> A comparison of early and final intention reasoning in LLMs.
-                The red items represent the user's final conversion intent. LLMs tend to over-balance
-                multiple plausible intents in the early stage (left), while FALCON anchors on the
-                decisive conversion path (right). The bar chart shows industry conversion scores.
+                <strong>Figure 2:</strong> Overview of the FALCON framework. FALCON has two stages:
+                (a) <strong>Flow Matching Teacher Pre-training</strong>, which learns time-conditioned intent
+                trajectories from user static and dynamic feature sequences using the FalconNet network;
+                (b) <strong>CF-OPD Post-training</strong>, which distills Flow-refined and conversion-aware signals
+                into the LLM student for teacher-free online serving.
             </p>
+
+            <div class="pipeline-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Partitioned XML Narrative Encoding</h3>
+                    <p>LLM transforms user behavioral history into structured XML segments (static, interest,
+                    consumption, demand) aggregated via QKV attention with static profiles as personalized anchors.</p>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Flow Matching Teacher (FalconNet)</h3>
+                    <p>Time-conditioned DiT architecture with AdaLN-Zero, QK-Norm, and RoPE learns a velocity field
+                    over 30-day trajectories to refine early-stage embeddings toward conversion-aligned states.</p>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>CF-OPD Post-training</h3>
+                    <p>Group-wise advantage estimation + reward-guided optimization distills the teacher's temporal
+                    reasoning into the LLM student. Serving path remains strictly teacher-free.</p>
+                </div>
+            </div>
         </section>
 
         <!-- Abstract -->
@@ -81,85 +105,45 @@
             </p>
         </section>
 
-        <!-- Framework Overview -->
-        <section class="method">
-            <h2>FALCON Framework</h2>
-            <div class="figure-placeholder large">
-                <div class="figure-box">
-                    <i class="fas fa-project-diagram figure-icon"></i>
-                    <span class="figure-label">Figure 2</span>
-                </div>
-            </div>
-            <p class="caption">
-                <strong>Figure 2:</strong> Overview of the FALCON framework. FALCON has two stages:
-                (a) <strong>Flow Matching Teacher Pre-training</strong>, which learns time-conditioned intent
-                trajectories from user static and dynamic feature sequences using the FalconNet network;
-                (b) <strong>CF-OPD Post-training</strong>, which distills Flow-refined and conversion-aware signals
-                into the LLM student for teacher-free online serving.
-            </p>
-
-            <div class="pipeline-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Partitioned XML Narrative Encoding</h3>
-                    <p>LLM transforms user behavioral history into structured XML segments (static, interest,
-                    consumption, demand) aggregated via QKV attention with static profiles as personalized anchors.</p>
-                </div>
-                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Flow Matching Teacher (FalconNet)</h3>
-                    <p>Time-conditioned DiT architecture with AdaLN-Zero, QK-Norm, and RoPE learns a velocity field
-                    over 30-day trajectories to refine early-stage embeddings toward conversion-aligned states.</p>
-                </div>
-                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>CF-OPD Post-training</h3>
-                    <p>Group-wise advantage estimation + reward-guided optimization distills the teacher's temporal
-                    reasoning into the LLM student. Serving path remains strictly teacher-free.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- FalconNet Architecture -->
+        <!-- FalconNet Architecture — Vertical Layout -->
         <section class="architecture">
             <h2>FalconNet Architecture</h2>
-            <div class="figure-placeholder">
-                <div class="figure-box">
-                    <i class="fas fa-cubes figure-icon"></i>
-                    <span class="figure-label">Figure 3</span>
+            <div class="arch-vertical">
+                <div class="arch-figure">
+                    <div class="figure-placeholder vertical-fig">
+                        <div class="figure-box vertical-fig-box">
+                            <i class="fas fa-cubes figure-icon"></i>
+                            <span class="figure-label">Figure 3</span>
+                        </div>
+                    </div>
+                    <p class="caption no-margin">
+                        <strong>Figure 3:</strong> FalconNet architecture. The input embedding x<sub>t</sub> &in; R<sup>256</sup>
+                        is patchified into P tokens. Time t, condition c, and temporal gap &Delta;t are encoded and
+                        summed as the global conditioning vector fed into L DiT blocks with AdaLN-Zero modulation,
+                        QK-Norm, RoPE, and SwiGLU FFN. Small-scale config: d=768, L=3, P=16, ~8M parameters.
+                    </p>
                 </div>
-            </div>
-            <p class="caption">
-                <strong>Figure 3:</strong> FalconNet architecture. The input embedding x<sub>t</sub> &in; R<sup>256</sup>
-                is patchified into P tokens (each R<sup>d_patch</sup>). Time t, condition c, and temporal gap &Delta;t
-                are encoded separately and summed to form the global conditioning vector fed into L DiT blocks.
-                Each block applies RMSNorm, Multi-Head Self-Attention with QK-Norm and RoPE, SwiGLU FFN,
-                and AdaLN-Zero modulation. The small-scale configuration (d=768, L=3, P=16, ~8M parameters)
-                provides an effective trade-off between capacity and training stability.
-            </p>
-
-            <div class="arch-details">
-                <div class="arch-item">
-                    <h4><i class="fas fa-puzzle-piece"></i> Patchify Embedding</h4>
-                    <p>256-dim user embedding reshaped into P patches, each projected to dimension d via linear layer
-                    with additive patch-type embeddings.</p>
-                </div>
-                <div class="arch-item">
-                    <h4><i class="fas fa-sliders-h"></i> AdaLN-Zero Modulation</h4>
-                    <p>Zero-initialized gate and output projection layers ensure each DiT block behaves as identity
-                    mapping at initialization, enabling stable deep network training.</p>
-                </div>
-                <div class="arch-item">
-                    <h4><i class="fas fa-link"></i> QK-Norm &amp; RoPE</h4>
-                    <p>Query-Key normalization stabilizes attention logits; Rotary Position Embedding injects relative
-                    positional information into query and key representations.</p>
-                </div>
-                <div class="arch-item">
-                    <h4><i class="fas fa-bolt"></i> SwiGLU Feed-Forward</h4>
-                    <p>Gated linear unit with SiLU activation, with hidden dimension set to 2/3 of standard FFN
-                    to match parameter count.</p>
+                <div class="arch-details-vertical">
+                    <div class="arch-item">
+                        <h4><i class="fas fa-puzzle-piece"></i> Patchify Embedding</h4>
+                        <p>256-dim user embedding reshaped into P patches, each projected to dimension d via linear layer
+                        with additive patch-type embeddings.</p>
+                    </div>
+                    <div class="arch-item">
+                        <h4><i class="fas fa-sliders-h"></i> AdaLN-Zero Modulation</h4>
+                        <p>Zero-initialized gate and output projection layers ensure each DiT block behaves as identity
+                        mapping at initialization, enabling stable deep network training.</p>
+                    </div>
+                    <div class="arch-item">
+                        <h4><i class="fas fa-link"></i> QK-Norm &amp; RoPE</h4>
+                        <p>Query-Key normalization stabilizes attention logits; Rotary Position Embedding injects relative
+                        positional information into query and key representations.</p>
+                    </div>
+                    <div class="arch-item">
+                        <h4><i class="fas fa-bolt"></i> SwiGLU Feed-Forward</h4>
+                        <p>Gated linear unit with SiLU activation, with hidden dimension set to 2/3 of standard FFN
+                        to match parameter count.</p>
+                    </div>
                 </div>
             </div>
         </section>
