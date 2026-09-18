@@ -5,7 +5,7 @@
 /* --- CSS Variables --- */
 :root {
     --primary-color: #1a1a2e;
-    --accent-color: #4f46e5;      /* Indigo */
+    --accent-color: #4f46e5;
     --accent-hover: #4338ca;
     --accent-light: rgba(79, 70, 229, 0.08);
     --bg-color: #fafbfc;
@@ -16,8 +16,11 @@
     --border-light: #f3f4f6;
     --highlight-bg: rgba(79, 70, 229, 0.06);
     --highlight-text: #4f46e5;
-    --success-color: #059669;
-    --warning-color: #d97706;
+    --gain-color: #059669;
+    --gain-bg: rgba(5, 150, 105, 0.06);
+    --loss-color: #dc2626;
+    --loss-bg: rgba(220, 38, 38, 0.04);
+    --best-bg: rgba(79, 70, 229, 0.06);
     --radius: 10px;
     --radius-sm: 6px;
     --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
@@ -181,7 +184,7 @@ h2 {
 h3 {
     font-size: 1.2rem;
     color: var(--primary-color);
-    margin: 28px 0 14px;
+    margin: 32px 0 12px;
     font-weight: 700;
 }
 
@@ -195,6 +198,13 @@ h4 {
 /* --- Sections --- */
 section {
     margin-bottom: 52px;
+}
+
+.section-note {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0 0 18px;
+    line-height: 1.6;
 }
 
 .abstract p {
@@ -212,101 +222,60 @@ section {
     border-radius: 3px;
 }
 
-/* --- Figure Placeholders --- */
-.figure-placeholder {
+/* --- Figures --- */
+figure.figure {
     margin: 24px 0 8px;
     text-align: center;
 }
 
-.figure-placeholder.large .figure-box {
-    min-height: 200px;
-}
-
-.figure-placeholder.small .figure-box {
-    min-height: 140px;
-}
-
-.figure-box {
-    background: var(--surface-color);
-    border: 2px dashed var(--border-color);
+figure.figure img {
+    max-width: 100%;
+    height: auto;
     border-radius: var(--radius);
-    min-height: 180px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: border-color 0.2s;
-    position: relative;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
 }
 
-.figure-box:hover {
-    border-color: var(--accent-color);
+figure.figure .vertical-img {
+    max-width: 320px;
 }
 
-.figure-icon {
-    font-size: 2rem;
-    color: var(--border-color);
-    transition: color 0.2s;
-}
-
-.figure-box:hover .figure-icon {
-    color: var(--accent-color);
-}
-
-.figure-label {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--text-secondary);
-    background: var(--border-light);
-    padding: 3px 12px;
-    border-radius: 12px;
-    letter-spacing: 0.02em;
-}
-
-.caption {
-    font-size: 0.88rem;
+figure.figure figcaption {
+    font-size: 0.86rem;
     color: var(--text-secondary);
     line-height: 1.6;
-    margin: 8px 0 24px;
+    margin-top: 8px;
     text-align: left;
-    padding: 12px 16px;
+    padding: 10px 14px;
     background: var(--accent-light);
     border-left: 3px solid var(--accent-color);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
-.caption.no-margin {
-    margin-bottom: 0;
+figure.figure-wide img {
+    max-width: 100%;
 }
 
-/* --- Vertical Figure (tall, for vertical diagrams) --- */
-.figure-placeholder.vertical-fig .figure-box,
-.vertical-fig-box {
-    min-height: 420px;
-    max-width: 360px;
-    margin: 0 auto;
+.caption {
+    font-size: 0.86rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 8px 0 20px;
+    text-align: left;
+    padding: 10px 14px;
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent-color);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
-/* --- Vertical Architecture Layout (figure left, details right) --- */
-.arch-vertical {
-    display: flex;
-    gap: 28px;
-    align-items: flex-start;
-    margin: 24px 0 8px;
-}
-
-.arch-figure {
-    flex: 0 0 340px;
-    min-width: 0;
-}
-
-.arch-details-vertical {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    min-width: 0;
+.gain-label {
+    display: inline-block;
+    width: 12px; height: 12px;
+    background: var(--gain-bg);
+    border: 1px solid var(--gain-color);
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-right: 2px;
 }
 
 /* --- Pipeline Steps --- */
@@ -366,12 +335,25 @@ section {
     margin-top: 36px;
 }
 
-/* --- Architecture Details --- */
-.arch-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
+/* --- Vertical Architecture Layout --- */
+.arch-vertical {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
     margin: 24px 0 8px;
+}
+
+.arch-figure {
+    flex: 0 0 340px;
+    min-width: 0;
+}
+
+.arch-details-vertical {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
 }
 
 .arch-item {
@@ -403,6 +385,104 @@ section {
     color: var(--text-secondary);
     margin: 6px 0 0;
     line-height: 1.55;
+}
+
+/* --- Data Tables --- */
+.table-responsive {
+    overflow-x: auto;
+    margin: 16px 0 12px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+    line-height: 1.45;
+}
+
+.data-table thead th {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 10px 10px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-align: center;
+    white-space: nowrap;
+    border: 1px solid #2d2d4a;
+}
+
+.data-table thead th:first-child {
+    border-radius: var(--radius-sm) 0 0 0;
+}
+
+.data-table thead th:last-child {
+    border-radius: 0 var(--radius-sm) 0 0;
+}
+
+.data-table tbody td {
+    padding: 8px 10px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-light);
+    font-variant-numeric: tabular-nums;
+}
+
+.data-table tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 var(--radius-sm);
+}
+
+.data-table tbody tr:last-child td:last-child {
+    border-radius: 0 0 var(--radius-sm) 0;
+}
+
+.data-table .backbone-label {
+    font-weight: 700;
+    color: var(--primary-color);
+    text-align: left;
+    border-right: 2px solid var(--border-color);
+}
+
+.data-table .gain {
+    color: var(--gain-color);
+    background: var(--gain-bg);
+    font-weight: 600;
+}
+
+.data-table .gain.best {
+    font-weight: 800;
+}
+
+.data-table .loss {
+    color: var(--loss-color);
+    background: var(--loss-bg);
+}
+
+.data-table .last-in-group td {
+    border-bottom: 2px solid var(--border-color);
+}
+
+.data-table .best-row td {
+    background: var(--best-bg);
+}
+
+.data-table .best-row td.gain.best {
+    background: rgba(79, 70, 229, 0.12);
+}
+
+.data-table tbody tr:hover td {
+    background: var(--border-light);
+}
+
+.data-table tbody tr:hover td.gain {
+    background: rgba(5, 150, 105, 0.1);
+}
+
+.data-table tbody tr:hover td.loss {
+    background: rgba(220, 38, 38, 0.08);
+}
+
+.data-table tbody tr.best-row:hover td {
+    background: rgba(79, 70, 229, 0.1);
 }
 
 /* --- Key Metrics --- */
@@ -453,15 +533,46 @@ section {
     font-weight: 500;
 }
 
-/* --- Ablation Grid --- */
-.ablation-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+/* --- A/B Results Section --- */
+.ab-results {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 24px;
 }
 
-.ablation-item.full-width {
-    grid-column: 1 / -1;
+.ab-table {
+    max-width: 600px;
+}
+
+/* --- Ablation Tables Side-by-Side --- */
+.ablation-tables {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.ablation-table-col h4 {
+    font-size: 0.92rem;
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.ablation-table-col .data-table {
+    font-size: 0.82rem;
+}
+
+/* --- Sensitivity Grid --- */
+.sensitivity-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.sensitivity-grid figure.figure {
+    margin-top: 0;
 }
 
 /* --- Contributions --- */
@@ -557,7 +668,7 @@ footer p {
     margin: 4px 0;
 }
 
-/* --- Responsive (mobile) --- */
+/* --- Responsive --- */
 @media (max-width: 768px) {
     .paper-title {
         font-size: 1.6rem;
@@ -574,22 +685,6 @@ footer p {
         padding: 4px 0;
     }
 
-    .ablation-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .ablation-item.full-width {
-        grid-column: 1;
-    }
-
-    .key-metrics {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .arch-details {
-        grid-template-columns: 1fr;
-    }
-
     .arch-vertical {
         flex-direction: column;
         align-items: center;
@@ -601,9 +696,29 @@ footer p {
         max-width: 340px;
     }
 
-    .figure-placeholder.vertical-fig .figure-box,
-    .vertical-fig-box {
-        min-height: 320px;
+    figure.figure .vertical-img {
+        max-width: 260px;
+    }
+
+    .ablation-tables {
+        grid-template-columns: 1fr;
+    }
+
+    .sensitivity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .key-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .data-table {
+        font-size: 0.78rem;
+    }
+
+    .data-table thead th,
+    .data-table tbody td {
+        padding: 6px 6px;
     }
 }
 
